@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murder for YOU!</title>
+    <style>
+        /* Default Styles for Light Mode */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff6347;
+            margin-top: 30px;
+        }
+
+        .button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #ff4500;
+        }
+
+        /* Dark Mode Styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #333;
+                color: white;
+            }
+
+            .button {
+                background-color: #ff4500;
+                color: white;
+            }
+
+            .button:hover {
+                background-color: #ff6347;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Murder for YOU!</h1>
+    
+    <!-- Soundboard Buttons -->
+    <div id="buttons-container">
+        <!-- Sound buttons will be dynamically inserted here -->
+    </div>
+
+    <script>
+        // Create each button with the raw URL links from your GitHub repository
+        
+        const soundFiles = [
+    { name: "Car Horn", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/01%20Car%20Horn.aif" },
+    { name: "He's Here", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/02%20He's%20Here.aif" },
+    { name: "Dead body?", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/03%20Dead%20body%3F.aif" },
+    { name: "Learn to love again", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/04%20Learn%20to%20love%20again.aif" },
+    { name: "Ding Dong", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/05%20Ding%20Dong.aif" },
+    { name: "God's Husband", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/06%20God's%20Husband.aif" },
+    { name: "All of them Bananas", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/07%20All%20of%20them%20Bananas.aif" },
+    { name: "Poor choice of words", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/08%20Poor%20choice%20of%20words.aif" },
+    { name: "Sweet gal", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/09%20Sweet%20gal.aif" },
+    { name: "Smoctor Smatient", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/10%20Smoctor%20Smatient.aif" },
+    { name: "G'night folks", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/100%20G'night%20folks.aif" },
+    { name: "So sure?", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/11%20So%20sure%3F.aif" },
+    { name: "First time", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/12%20First%20time.aif" },
+    { name: "Good at that too", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/13%20Good%20at%20that%20too.aif" },
+    { name: "Hm", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/14%20Hm.aif" },
+    { name: "Guess what", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/15%20Guess%20what.aif" },
+    { name: "I dunno", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/16%20I%20dunno.aif" },
+    { name: "I know who did it", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/17%20I%20know%20who%20did%20it.aif" },
+    { name: "Murray!", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/18%20Murray%21.aif" },
+    { name: "Hiiiiii", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/19%20Hiiiiii.aif" },
+    { name: "Shut it!", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/20%20Shut%20it%21.aif" },
+    { name: "I got class", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/21%20I%20got%20class.aif" },
+    { name: "Call WW a class", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/22%20Call%20WW%20a%20class.aif" },
+    { name: "At least I don't have", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/23%20At%20least%20I%20don't%20have.aif" },
+    { name: "You might", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/24%20You%20might.aif" },
+    { name: "Goal weight", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/25%20Goal%20weight.aif" },
+    { name: "You tough man", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/26%20You%20tough%20man.aif" },
+    { name: "The feisty old couple!", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/27%20The%20feisty%20old%20couple%21.aif" },
+    { name: "Freudian Sex", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/28%20Freudian%20Sex.aif" },
+    { name: "I'm not acting", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/29%20I'm%20not%20acting.aif" },
+    { name: "Cheeseburgers", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/30%20Cheeseburgers.aif" },
+    { name: "Friendly old psychiatrist", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/31%20Friendly%20old%20psychiatrist.aif" },
+    { name: "I don't remember asking", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/32%20I%20don't%20remember%20asking.aif" },
+    { name: "Stephinitely", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/33%20Stephinitely.aif" },
+    { name: "Later", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/34%20Later.aif" },
+    { name: "I'm nine!", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/35%20I'm%20nine%21.aif" },
+    { name: "Yonkers hi", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/36%20Yonkers%20hi.aif" },
+    { name: "Skid hi", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/37%20Skid%20hi.aif" },
+    { name: "Badoinkaville", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/38%20Badoinkaville.aif" },
+    { name: "Wings 4", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/39%20Wings%204.aif" },
+    { name: "OH BANANAS", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/40%20OH%20BANANAS.aif" },
+    { name: "Y'welcome1", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/41%20Y'welcome1.aif" },
+    { name: "WHO'S THAT?", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/42%20WHO'S%20THAT%3F.aif" },
+    { name: "EUUUUUGGGGH", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/43%20EUUUUUGGGGH.aif" },
+    { name: "oh detective", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/44%20oh%20detective.aif" },
+    { name: "hot and wet", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/45%20hot%20and%20wet.aif" },
+    { name: "cold and wet", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/46%20cold%20and%20wet.aif" },
+    { name: "I have to watch", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/47%20I%20have%20to%20watch.aif" },
+    { name: "Clearly falling in love", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/48%20Clearly%20falling%20in%20love.aif" },
+    { name: "Chopping up", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/49%20Chopping%20up.aif" },
+    { name: "For $1.50", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/50%20For%20%241.50.aif" },
+    { name: "3 eyes?", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/51%203%20eyes%3F.aif" },
+    { name: "Buckaroo", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/52%20Buckaroo.aif" },
+    { name: "Out in a minute", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/53%20Out%20in%20a%20minute.aif" },
+    { name: "Oh", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/54%20Oh.aif" },
+    { name: "Leave me alone", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/55%20Leave%20me%20alone.aif" },
+    { name: "This is a rondejamb", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/56%20This%20is%20a%20rondejamb.aif" },
+    { name: "Grunty", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/57%20Grunty.aif" },
+    { name: "Grunty", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/58%20Grunty.aif" },
+    { name: "Ayyyy", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/59%20Ayyyy.aif" },
+    { name: "Makes me giggle", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/60%20Makes%20me%20giggle.aif" },
+    { name: "I've changed", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/61%20I've%20changed.aif" },
+    { name: "Entire jury", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/62%20Entire%20jury.aif" },
+    { name: "We got bored", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/63%20We%20got%20bored.aif" },
+    { name: "Reprise offstage", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/64%20Reprise%20offstage.aif" },
+    { name: "Hussy!", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/65%20Hussy%21.aif" },
+    { name: "Especially in bed", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/66%20Especially%20in%20bed.aif" },
+    { name: "Marcus, everyone, Lou", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/67%20Marcus%2C%20everyone%2C%20Lou.aif" },
+    { name: "Not this time lady", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/68%20Not%20this%20time%20lady.aif" },
+    { name: "HUSSY", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/69%20HUSSY.aif" },
+    { name: "I thought we got each other", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/70%20I%20thought%20we%20got%20each%20other.aif" },
+    { name: "He's bananas!", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/71%20He's%20bananas%21.aif" },
+    { name: "Daddy issues", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/72%20Daddy%20issues.aif" },
+    { name: "Sad when it rains", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/73%20Sad%20when%20it%20rains.aif" },
+    { name: "You hurt me Marcus", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/74%20You%20hurt%20me%20Marcus.aif" },
+    { name: "I love you", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/75%20I%20love%20you.aif" },
+    { name: "After the big finish", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/76%20After%20the%20big%20finish.aif" },
+    { name: "Can you speak?", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/77%20Can%20you%20speak%3F.aif" },
+    { name: "euggh", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/78%20euggh.aif" },
+    { name: "Can I have some music", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/79%20Can%20I%20have%20some%20music.aif" },
+    { name: "Slow painful death", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/80%20Slow%20painful%20death.aif" },
+    { name: "YIKES!", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/81%20YIKES%21.aif" },
+    { name: "You DO know how to whistle", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/82%20You%20DO%20know%20how%20to%20whistle.aif" },
+    { name: "I know how to whistle", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/83%20I%20know%20how%20to%20whistle.aif" },
+    { name: "Except for me", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/84%20Except%20for%20me.aif" },
+    { name: "The flies", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/85%20The%20flies.aif" },
+    { name: "He is fun", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/86%20He%20is%20fun.aif" },
+    { name: "We were quiet", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/87%20We%20were%20quiet.aif" },
+    { name: "Whoopie", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/88%20Whoopie.aif" },
+    { name: "How DARE YOU", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/89%20How%20DARE%20YOU.aif" },
+    { name: "Oh bananas", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/90%20Oh%20bananas.aif" },
+    { name: "Seen a lot woise", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/91%20Seen%20a%20lot%20woise.aif" },
+    { name: "Now clap for me", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/92%20Now%20clap%20for%20me.aif" },
+    { name: "Should not have to ask", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/93%20Should%20not%20have%20to%20ask.aif" },
+    { name: "I'm kidding", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/94%20I'm%20kidding.aif" },
+    { name: "I love you", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/95%20I%20love%20you.aif" },
+    { name: "Peace out", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/96%20Peace%20out.aif" },
+    { name: "I KNOW!", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/97%20I%20KNOW%21.aif" },
+    { name: "GAWD", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/98%20GAWD.aif" },
+    { name: "Careful", url: "https://raw.githubusercontent.com/ijeezy/Murder-for-You/main/99%20Careful.aif" }
+];
+
+
+        // Get the container to insert buttons into
+        const container = document.getElementById("buttons-container");
+
+        // Function to create a button for each sound
+        soundFiles.forEach(sound => {
+            const button = document.createElement("button");
+            button.classList.add("button");
+            button.innerText = sound.name;
+
+            // Play the sound when the button is clicked
+            button.onclick = () => {
+                const audio = new Audio(sound.url);
+                audio.play();
+            };
+
+            // Append the button to the container
+            container.appendChild(button);
+        });
+    </script>
+
+</body>
+</html>
